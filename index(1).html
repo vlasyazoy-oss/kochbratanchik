@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ru"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Дебют — платформа для студенческих работ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&amp;family=Unbounded:wght@500;700&amp;display=swap" rel="stylesheet">
+<style>
+:root{--bg:#EEEFEE;--surface:#FFFFFF;--ink:#26292A;--muted:#5C6361;--line:#D0D4D2;--blue:#2F7D5B;--onblue:#FFFFFF;--sun:#F2B8B5;--onsun:#4A1F1E;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1E2120;--surface:#292D2C;--ink:#ECEEED;--muted:#A3A9A7;--line:#3D4240;--blue:#6CC79B;--onblue:#14201A}}
+:root[data-theme="dark"]{--bg:#1E2120;--surface:#292D2C;--ink:#ECEEED;--muted:#A3A9A7;--line:#3D4240;--blue:#6CC79B;--onblue:#14201A}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 Onest,system-ui,sans-serif}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--surface);z-index:10}
+h1,h2,h3{font-family:Unbounded,Onest,system-ui,sans-serif;line-height:1.15;margin:0}
+.page{max-width:980px;margin:0 auto;background:var(--surface);border-inline:1px solid var(--line);min-height:100vh}
+.pad{padding:0 28px}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:11;background:var(--surface);border-bottom:2px solid var(--ink)}
+.top .pad{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-top:14px;padding-bottom:14px}
+.logo{display:flex;align-items:center;gap:10px;font-family:Unbounded,sans-serif;font-weight:700;font-size:20px;letter-spacing:.04em;text-transform:uppercase}
+.mark{width:26px;height:26px;border-radius:50%;border:5px solid var(--blue);box-shadow:0 0 0 3px var(--sun)}
+.tabs{display:flex;gap:4px;flex-wrap:wrap}
+.tab{background:none;border:0;border-bottom:3px solid transparent;font:inherit;font-size:14px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:8px 12px;cursor:pointer}
+.tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--blue)}
+button:focus-visible,a:focus-visible{outline:3px solid var(--sun);outline-offset:3px}
+.btn{display:inline-block;background:var(--blue);color:var(--onblue);padding:13px 24px;border:0;border-radius:4px;font:inherit;font-weight:600;letter-spacing:.04em;text-decoration:none;cursor:pointer}
+.btn.ghost{background:none;color:var(--ink);border:2px solid var(--ink)}
+.center{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:center;background:var(--bg);border-bottom:1px solid var(--line);padding:44px 28px}
+.eyebrow{font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin-bottom:14px}
+h1{font-size:clamp(32px,5.5vw,54px);font-weight:700;letter-spacing:-.02em}
+.center p{color:var(--muted);font-size:18px;margin:18px 0 26px;max-width:42ch}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+.rings{aspect-ratio:1;max-width:340px;width:100%;justify-self:center;border-radius:50%;display:grid;place-items:center;color:var(--ink);background:radial-gradient(circle,var(--surface) 0 22%,var(--blue) 22% 30%,transparent 30% 40%,var(--sun) 40% 45%,transparent 45% 55%,var(--line) 55% 57%,transparent 57%)}
+.rings svg{width:22%;height:22%}
+.update{display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center;padding:28px;border-bottom:1px solid var(--line)}
+.update h3{font-size:20px;margin:6px 0}
+.update small,.date{color:var(--muted);font-size:14px}
+.status{display:inline-block;background:var(--sun);color:var(--onsun);font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border-radius:3px}
+.promos{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-bottom:1px solid var(--line)}
+.promo{padding:28px;border:0;border-right:1px solid var(--line);background:none;text-align:left;font:inherit;color:var(--ink);cursor:pointer}
+.promo:last-child{border-right:0}
+.promo:hover{background:var(--bg)}
+.promo b{display:block;font-family:Unbounded,sans-serif;font-weight:500;font-size:17px;margin:8px 0}
+.promo span{color:var(--muted);font-size:15px}
+.num{font-size:13px;font-weight:600;letter-spacing:.1em;color:var(--blue)}
+section{padding:48px 28px;border-bottom:1px solid var(--line)}
+h2{font-size:clamp(22px,3.6vw,30px);margin-bottom:12px}
+.lead{color:var(--muted);max-width:58ch;margin:0 0 28px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.box{background:var(--bg);border:1px solid var(--line);border-top:4px solid var(--blue);border-radius:4px;padding:20px}
+.box h3{font-size:16px;margin-bottom:8px}
+.box p{margin:0;color:var(--muted);font-size:15px}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.steps{list-style:none;margin:0;padding:0}
+.steps li{display:grid;grid-template-columns:120px 1fr;gap:16px;padding:16px 0;border-top:1px solid var(--line)}
+.steps b{font-family:Unbounded,sans-serif;font-weight:500;color:var(--blue);font-size:14px}
+.table{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:460px}
+td,th{text-align:left;padding:13px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+td:last-child{white-space:nowrap;font-weight:600}
+.note{font-size:14px;color:var(--muted);margin:14px 0 0}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+.chip{background:var(--surface);color:var(--ink);border:2px solid var(--line);border-radius:4px;padding:7px 14px;font:inherit;font-size:14px;font-weight:600;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.works{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
+.work{background:var(--surface);border:1px solid var(--line);border-radius:4px;overflow:hidden}
+.work[hidden]{display:none}
+.cover{aspect-ratio:16/10;display:grid;place-items:center;position:relative}
+.cover svg{width:44px;height:44px}
+.cover .status{position:absolute;left:10px;top:10px}
+.c1{background:var(--blue);color:var(--onblue)}.c2{background:var(--sun);color:var(--onsun)}.c3{background:var(--line);color:var(--ink)}
+.wbody{padding:14px 16px 16px}
+.wbody h3{font-size:16px;margin-bottom:4px}
+.wbody small{display:block;color:var(--muted);margin-bottom:12px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.wsup{background:var(--ink);color:var(--surface);border:0;border-radius:4px;padding:8px 14px;font:inherit;font-size:14px;font-weight:600;cursor:pointer}
+.plan .box{border-top-color:var(--sun)}
+footer{padding:32px 28px 48px;color:var(--muted);font-size:14px}
+footer .row{flex-wrap:wrap;margin-bottom:14px}
+footer a{color:var(--ink)}
+@media (max-width:760px){.center,.update,.split,.promos{grid-template-columns:1fr}.promo{border-right:0;border-bottom:1px solid var(--line)}.steps li{grid-template-columns:1fr;gap:4px}.rings{max-width:220px}.pad,.center,.update,section,.promo,footer{padding-left:18px;padding-right:18px}}
+</style>
+<style id="custom">:root{--bg:#eeefee;--blue:#408080;--sun:#beebbc;--ink:#26292a;--onblue:#FFFFFF;--onsun:#26292A;}</style></head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-film" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M10 9l5 3-5 3z" fill="currentColor"></path></symbol><symbol id="i-music" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V6l10-2v12"></path><circle cx="6.5" cy="18" r="2.5"></circle><circle cx="16.5" cy="16" r="2.5"></circle></symbol><symbol id="i-art" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"></rect><circle cx="9" cy="9" r="1.5"></circle><path d="M4 17l5-5 4 4 3-3 4 4"></path></symbol></svg>
+<div class="page">
+<nav class="top"><div class="pad">
+<span class="logo"><span class="mark"></span>Дебют</span>
+<div class="tabs" role="tablist">
+<button class="tab" role="tab" data-tab="home" aria-selected="true" type="button">Главная</button>
+<button class="tab" role="tab" data-tab="about" aria-selected="false" type="button">О проекте</button>
+<button class="tab" role="tab" data-tab="works" aria-selected="false" type="button">Работы</button>
+<button class="tab" role="tab" data-tab="plan" aria-selected="false" type="button">План</button>
+</div></div></nav>
+
+<main id="home" class="pane">
+<div class="center">
+<div>
+<div class="eyebrow">Платформа для молодых авторов</div>
+<h1>Студенческие работы заслуживают сцены</h1>
+<p>Фильмы, музыка и арт-объекты студентов в одном месте. Зрители поддерживают авторов деньгами, платформа помогает лучшим выйти за пределы вуза.</p>
+<div class="btns"><button class="btn" data-go="works" type="button">Смотреть работы</button><button class="btn ghost" data-go="about" type="button">Для инвесторов</button></div>
+</div>
+<div class="rings"><svg viewBox="0 0 64 64" fill="currentColor" aria-hidden="true"><path d="M20 10l36 22-36 22z"></path></svg></div>
+</div>
+<div class="update">
+<div><span class="status">Статус проекта</span><h3>Идея и черновой прототип</h3><small>Ищем инвестиции на команду из нескольких разработчиков для первой рабочей версии.</small></div>
+<button class="btn" data-go="plan" type="button">Читать план</button>
+</div>
+<div class="promos">
+<button class="promo" data-go="works" type="button"><span class="num">01</span><b>Зрителям</b><span>Смотрите бесплатно и поддерживайте авторов.</span></button>
+<button class="promo" data-go="about" type="button"><span class="num">02</span><b>Авторам</b><span>Загрузите работу, найдите аудиторию и деньги на следующую.</span></button>
+<button class="promo" data-go="about" type="button"><span class="num">03</span><b>Партнёрам</b><span>Вузы, студии и инвесторы: доступ к талантам раньше рынка.</span></button>
+</div>
+</main>
+
+<main id="about" class="pane" hidden="">
+<section>
+<h2>Проблема: хорошие работы остаются в папке</h2>
+<p class="lead">Диплом смотрят преподаватели и друзья, потом он исчезает. У авторов нет аудитории, денег на следующую работу и пути к профессии.</p>
+<div class="grid">
+<div class="box"><h3>Нет площадки?</h3><p>Общие стриминги не показывают учебные работы.</p></div>
+<div class="box"><h3>Нет дохода?</h3><p>Нечем окупить материалы, оборудование и время.</p></div>
+<div class="box"><h3>Нет выхода на рынок?</h3><p>Студии и лейблы не знают, где искать таланты.</p></div>
+</div>
+</section>
+<section>
+<h2>Решение: три формата и прямая поддержка</h2>
+<p class="lead">Платформа принимает работы студентов вузов и колледжей и даёт зрителю простой способ помочь автору.</p>
+<div class="grid">
+<div class="box"><h3>Кино и видео</h3><p>Короткий метр, анимация, документалистика.</p></div>
+<div class="box"><h3>Музыка</h3><p>Альбомы, EP, саундтреки.</p></div>
+<div class="box"><h3>Арт-объекты</h3><p>Графика, 3D, фото, инсталляции.</p></div>
+<div class="box"><h3>Спонсорство</h3><p>Разовый донат или подписка на автора.</p></div>
+</div>
+</section>
+<section>
+<h2>Как это работает для трёх сторон</h2>
+<ol class="steps">
+<li><b>Автор</b><span>Загружает работу бесплатно, открывает страницу поддержки, получает деньги от желающих и честную оценку.</span></li>
+<li><b>Зритель</b><span>Смотрит и слушает бесплатно, подписывается, поддерживает авторов и видит, на что пошли средства.</span></li>
+<li><b>Партнёр</b><span>Автор, подписавший партнёрство, получает продвижение: подборки, рассылки, заявки на фестивали, показы. Компании-инвесторы получают доступ к талантам раньше рынка.</span></li>
+</ol>
+</section>
+<section>
+<h2>Как платформа зарабатывает</h2>
+<p class="lead">Пока это гипотезы для обсуждения. Цифры уточним после тестов с авторами.</p>
+<div class="table"><table>
+<tbody><tr><th>Источник</th><th>Суть</th><th>Доля</th></tr>
+<tr><td>Комиссия с поддержки</td><td>Процент с донатов и подписок</td><td>8–10%</td></tr>
+<tr><td>Партнёрский пакет</td><td>Продвижение авторов в обмен на долю дохода</td><td>по договору</td></tr>
+<tr><td>Вузы и школы</td><td>Витрина вуза и аналитика по работам</td><td>подписка</td></tr>
+<tr><td>Бренды и студии</td><td>Поиск талантов, заказы, конкурсы</td><td>за проект</td></tr>
+</tbody></table></div>
+</section>
+<section>
+<h2>Куда пойдут деньги инвесторов</h2>
+<p class="lead">Основной бюджет уйдёт на небольшую команду, чтобы выпустить первую версию.</p>
+<div class="split">
+<div class="box"><h3>Команда</h3><p>2 full-stack разработчика, 1 frontend или мобильный разработчик, дизайнеры на частичной занятости. Около 6 месяцев до первой версии.</p></div>
+<div class="box"><h3>Что получится?</h3><p>Загрузка и просмотр видео, аудио и изображений, профили авторов, платежи, кабинет статистики, заявки на партнёрство.</p></div>
+</div>
+<p class="note">Размер раунда и бюджет по статьям впишем после расчёта зарплат и хостинга.</p>
+</section>
+</main>
+
+<main id="works" class="pane" hidden="">
+<section>
+<h2>Работы студентов</h2>
+<p class="lead">Смотрите, слушайте и поддерживайте авторов. Это примеры того, как будет выглядеть каталог.</p>
+<div class="chips" id="chips">
+<button class="chip" data-cat="all" aria-pressed="true" type="button">Все</button>
+<button class="chip" data-cat="film" aria-pressed="false" type="button">Кино</button>
+<button class="chip" data-cat="music" aria-pressed="false" type="button">Музыка</button>
+<button class="chip" data-cat="art" aria-pressed="false" type="button">Арт-объекты</button>
+</div>
+<div class="works" id="grid"><article class="work" data-cat="film"><div class="cover c1"><span class="status">Работа 01</span><svg><use href="#i-film"></use></svg></div><div class="wbody"><h3>«тест»</h3><small>тест</small><div class="row"><span><b>0</b> €</span><button class="wsup" type="button">Поддержать</button></div></div></article><article class="work" data-cat="music"><div class="cover c2"><span class="status">Работа 02</span><svg><use href="#i-music"></use></svg></div><div class="wbody"><h3>EP «тест»</h3><small>тест</small><div class="row"><span><b>0</b> €</span><button class="wsup" type="button">Поддержать</button></div></div></article><article class="work" data-cat="art"><div class="cover c3"><span class="status">Работа 03</span><svg><use href="#i-art"></use></svg></div><div class="wbody"><h3>Серия «тест»</h3><small>тест</small><div class="row"><span><b>0</b> €</span><button class="wsup" type="button">Поддержать</button></div></div></article><article class="work" data-cat="film"><div class="cover c2"><span class="status">Работа 04</span><svg><use href="#i-film"></use></svg></div><div class="wbody"><h3>Анимация «тест»</h3><small>тест</small><div class="row"><span><b>0</b> €</span><button class="wsup" type="button">Поддержать</button></div></div></article><article class="work" data-cat="music"><div class="cover c3"><span class="status">Работа 05</span><svg><use href="#i-music"></use></svg></div><div class="wbody"><h3>тест</h3><small>тест</small><div class="row"><span><b>0</b> €</span><button class="wsup" type="button">Поддержать</button></div></div></article><article class="work" data-cat="art"><div class="cover c1"><span class="status">Работа 06</span><svg><use href="#i-art"></use></svg></div><div class="wbody"><h3>Инсталляция «тест»</h3><small>тест</small><div class="row"><span><b>0</b> €</span><button class="wsup" type="button">Поддержать</button></div></div></article></div>
+</section>
+</main>
+
+<main id="plan" class="pane plan" hidden="">
+<section>
+<h2>План по этапам</h2>
+<p class="lead">Три шага от идеи до открытого запуска.</p>
+<div class="grid">
+<div class="box"><span class="num">Месяцы 1–2</span><h3>Проверка идеи</h3><p>Прототип, интервью с 30 студентами и 100 зрителями, договорённость с 2–3 вузами.</p></div>
+<div class="box"><span class="num">Месяцы 3–5</span><h3>Рабочая версия</h3><p>Сайт с загрузкой работ, первые 50 авторов, первые платежи.</p></div>
+<div class="box"><span class="num">Месяц 6</span><h3>Запуск</h3><p>Открытый запуск, первый партнёрский показ, метрики для следующего раунда.</p></div>
+</div>
+</section>
+</main>
+
+<footer>
+<div class="row"><b>Хотите вложиться или стать партнёром?</b><a class="btn" href="mailto:hello@example.com">Написать основателю</a></div>
+Черновик для обсуждения с инвесторами. Названия, авторы и цифры примерные.
+</footer>
+</div>
+
+<script>
+(function(){
+var tabs=document.querySelectorAll('.tab'),panes=document.querySelectorAll('.pane');
+function show(n){panes.forEach(function(p){p.hidden=p.id!==n});tabs.forEach(function(t){t.setAttribute('aria-selected',t.dataset.tab===n?'true':'false')});window.scrollTo(0,0)}
+window.show=show;
+tabs.forEach(function(t){t.addEventListener('click',function(){show(t.dataset.tab)})});
+document.querySelectorAll('[data-go]').forEach(function(b){b.addEventListener('click',function(){show(b.dataset.go)})});
+var g=document.getElementById('grid');
+g.addEventListener('click',function(e){var b=e.target.closest('.wsup');if(!b)return;var n=b.parentNode.querySelector('b');n.textContent=(+n.textContent)+5});
+var chips=document.querySelectorAll('.chip');
+chips.forEach(function(c){c.addEventListener('click',function(){
+chips.forEach(function(x){x.setAttribute('aria-pressed',x===c?'true':'false')});
+g.querySelectorAll('.work').forEach(function(w){w.hidden=c.dataset.cat!=='all'&&w.dataset.cat!==c.dataset.cat});
+})});
+})();
+</script>
+
+
+</body></html>

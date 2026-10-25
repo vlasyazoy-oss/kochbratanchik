@@ -227,6 +227,23 @@ footer a{color:var(--ink)}
 .lb{position:fixed;inset:0;z-index:50;background:rgba(5,20,35,.85);display:grid;place-items:center;padding:20px;cursor:zoom-out}
 .lb[hidden]{display:none}
 .lb img{max-width:100%;max-height:90vh;border-radius:var(--r);box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.asite{display:inline-block;font-size:14px;font-weight:600;color:var(--blue);margin:-6px 0 12px;text-decoration:none}.asite:hover{text-decoration:underline}
+.gbox{display:flex;gap:16px;align-items:center;flex-wrap:wrap;padding:20px;border-radius:var(--r);border:1px dashed color-mix(in srgb,var(--blue) 45%,transparent);background:color-mix(in srgb,var(--blue) 8%,transparent)}
+.gbox>div:nth-child(2){flex:1;min-width:200px}.gbox p{margin:4px 0 0;color:var(--muted);font-size:15px}
+.gico{width:48px;height:48px;flex:none;border-radius:50%;display:grid;place-items:center;font-size:22px;background:var(--blue);color:var(--onblue)}
+.gb iframe{display:block;width:100%;height:520px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface);margin-bottom:16px}
+.cover .status{z-index:2}
+.work[data-kind=film] .cover::before,.work[data-kind=art] .cover::before,.work[data-kind=music] .cover::before{content:"";position:absolute;z-index:1;pointer-events:none}
+.work[data-kind=film] .cover::before{inset:0;background:repeating-linear-gradient(90deg,rgba(0,0,0,.5) 0 9px,transparent 9px 16px) top/100% 7px no-repeat,repeating-linear-gradient(90deg,rgba(0,0,0,.5) 0 9px,transparent 9px 16px) bottom/100% 7px no-repeat;opacity:.6}
+.work[data-kind=music] .cover::before{right:-20px;bottom:-20px;width:70px;height:70px;border-radius:50%;background:radial-gradient(circle,var(--sun) 0 13%,#111 14% 20%,#222 21% 100%);box-shadow:inset 0 0 0 6px rgba(255,255,255,.06),inset 0 0 0 14px rgba(0,0,0,.2);opacity:.9}
+.work[data-kind=art] .cover::before{inset:8px;border:2px solid rgba(255,255,255,.6);border-radius:calc(var(--r) * .5);box-shadow:0 0 0 1px rgba(0,0,0,.15)}
+.egg{position:fixed;inset:0;z-index:70;background:rgba(4,14,24,.75);display:grid;place-items:center;padding:16px}
+.egg[hidden]{display:none}
+.eggbox{width:min(520px,100%);text-align:center;color:#fff}
+.eggbox img{display:block;width:100%;max-height:70vh;object-fit:cover;border-radius:var(--r);box-shadow:0 30px 80px rgba(0,0,0,.55);animation:drop .9s cubic-bezier(.2,1.35,.45,1)}
+.eggbox p{margin:16px 0;font-size:16px}
+@keyframes drop{from{transform:translateY(-110vh) rotate(-10deg)}to{transform:none}}
+@media (prefers-reduced-motion:reduce){.eggbox img{animation:none}}
 .dm{position:fixed;inset:0;z-index:60;background:rgba(4,14,24,.62);display:grid;place-items:center;padding:16px}
 .dm[hidden],.dstep[hidden]{display:none}
 .dbox{position:relative;width:min(460px,100%);max-height:calc(100vh - 32px);overflow:auto;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:calc(var(--r) * 1.3);padding:26px 24px 22px;box-shadow:0 30px 80px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.15)}
@@ -328,11 +345,12 @@ text:{n:'Текст',d:{title:'Новый раздел',text:'Ваш текст.
 cards:{n:'Карточки',d:{title:'Карточки',lead:'',cols:'',items:'Первая | Описание\nВторая | Описание\nТретья | Описание'},f:[T,L,['cols','Карточек в ряд','s',[['','Авто'],['2','2'],['3','3'],['4','4']]],['items','Карточки, по строке на каждую: Заголовок | Описание | название страницы (необязательно, карточка станет ссылкой) | картинка (необязательно, удобнее кнопками ниже)','a']]},
 steps:{n:'Список',d:{title:'Список',lead:'',items:'Шаг 1 | Описание\nШаг 2 | Описание'},f:[T,L,['items','Строки: Метка | Описание','a']]},
 table:{n:'Таблица',d:{title:'Таблица',lead:'',items:'Колонка 1 | Колонка 2\nА | Б'},f:[T,L,['items','Строки, колонки через |. Первая строка это заголовок','a']]},
-works:{n:'Каталог работ',d:{title:'Работы',lead:'',items:'Кино | Название | Автор, детали'},f:[T,L,['items','Строки: Категория | Название | Автор и детали | картинка (необязательно). Кнопки фильтра создаются из категорий','a']]},
+works:{n:'Каталог работ',d:{title:'Работы',lead:'',items:'Кино | Название | Автор, детали'},f:[T,L,['items','Строки: Категория | Название | Автор и детали | картинка | сайт автора (https://…). Картинка и сайт необязательны: если картинки нет, а сайт есть, оставьте между | пусто. Кнопки фильтра создаются из категорий','a']]},
 image:{n:'Картинка',d:{title:'',cap:'',src:'',w:100,al:'c',rd:16,gl:true,go:''},f:[T,['cap','Подпись'],['src','Картинка','i'],['w','Ширина','r',[20,100,100,'%']],['al','Положение','s',[['l','Слева'],['c','По центру'],['r','Справа']]],['rd','Скругление углов','r',[0,60,16,' px']],['gl','Тень и стеклянный блик','k'],['go','При клике открыть страницу','p']]},
 gallery:{n:'Галерея',d:{title:'Галерея',lead:'',cols:'3',ratio:'4/3',items:'Первая картинка | \nВторая картинка | \nТретья картинка | '},f:[T,L,['cols','Колонок','s',[['2','2'],['3','3'],['4','4'],['5','5']]],['ratio','Форма плиток','s',[['1/1','Квадрат'],['4/3','4 : 3'],['16/9','16 : 9'],['3/4','Портрет 3 : 4'],['auto','Как у картинки']]],['items','Строки: Подпись | картинка. Картинки проще добавлять кнопками ниже, клик по картинке на сайте открывает её крупно','a']]},
 imgtext:{n:'Картинка и текст',d:{title:'Заголовок',text:'Расскажите, что на картинке.',src:'',side:'l',b1:'',p1:''},f:[T,['text','Текст','a'],['src','Картинка','i'],['side','Где картинка','s',[['l','Слева'],['r','Справа']]],['b1','Кнопка (можно пусто)'],['p1','Куда ведёт кнопка','p']]},
 canvas:{n:'Схема (фигуры)',d:{title:'Схема',lead:'',h:'420',shapes:[shp('rect',80,150,220,100,'#1593D8','#FFFFFF','Автор'),shp('arrow',310,200,130,0),shp('rect',450,150,220,100,'#8CD46A','#0E2A3F','Платформа'),shp('arrow',680,200,100,0),shp('ell',790,140,160,120,'#E6F7FF','#0E2A3F','Зрители')]},f:[T,L,['h','Высота холста в пикселях (150–1400)'],['_','','e']]},
+guest:{n:'Гостевая книга',d:{title:'Гостевая книга',lead:'Оставьте пару слов о платформе: что понравилось и чего не хватает.',url:'',embed:false},f:[T,L,['url','Ссылка на гостевую книгу (https://…, например бесплатная atabook.org). Пусто = отзывы приходят письмом на вашу почту'],['embed','Показывать книгу прямо на странице (если сервис это разрешает)','k']]},
 cta:{n:'Призыв',d:{title:'Свяжитесь с нами',text:'',b1:'Написать',link:''},f:[T,['text','Текст','a'],['b1','Текст кнопки'],['link','Ссылка (https://… или mailto:…). Пусто = ваша почта']]}
 };
 var DZ=[['_bg','Цвет фона','c',1],['_bgi','Фоновая картинка','i'],['_tc','Цвет текста','c',1],['_al','Выравнивание','s',[['','По левому краю'],['c','По центру']]],['_pd','Отступы сверху и снизу','s',[['','Обычные'],['s','Компактные'],['l','Просторные']]],['_hide','Скрыть блок на сайте','k']];
@@ -344,7 +362,7 @@ aqua:{n:'Аэро · Аква',c:{bg:'#D4F6F4',surface:'#FFFFFF',blue:'#0FA3B1',
 classic:{n:'Плоский · Классика',c:{bg:'#EEEFEE',surface:'#FFFFFF',blue:'#2F7D5B',sun:'#F2B8B5',ink:'#26292A'},s:{skin:'flat',fh:'Unbounded',fb:'Onest',r:4,bubbles:false}}};
 var DEFAULT={logo:'Дебют',title:'Дебют — платформа для студенческих работ',desc:'Фильмы, музыка и арт-объекты студентов в одном месте. Зрители поддерживают авторов, платформа помогает лучшим выйти за пределы вуза.',mail:'Olegmorizoy@gmail.com',ft:'Хотите вложиться или стать партнёром?',footer:'Черновик для обсуждения с инвесторами. Названия, авторы и цифры примерные.',
 colors:{bg:'#D4F6F4',surface:'#FFFFFF',blue:'#0FA3B1',sun:'#9BE15D',ink:'#0B2B30'},
-style:{skin:'aero',fh:'Exo 2',fb:'Nunito',fs:17,r:14,w:1040,bubbles:true,dark:'auto',bgimg:'',logo:''},images:{},pages:[
+style:{skin:'aero',fh:'Exo 2',fb:'Nunito',fs:17,r:14,w:1040,bubbles:true,dark:'auto',bgimg:'',logo:'',egg:''},images:{},pages:[
 {id:'home',name:'Главная',blocks:[
 {t:'hero',eyebrow:'Платформа для молодых авторов',title:'Студенческие работы заслуживают сцены',text:'Фильмы, музыка и арт-объекты студентов в одном месте. Зрители поддерживают авторов деньгами, платформа помогает лучшим выйти за пределы вуза.',b1:'Смотреть работы',p1:'works',b2:'Для инвесторов',p2:'about',deco:'',img:''},
 {t:'cards',title:'Для кого платформа',lead:'',items:['Зрителям | Смотрите бесплатно и поддерживайте авторов. | Работы','Авторам | Загрузите работу, найдите аудиторию и деньги на следующую. | О проекте','Партнёрам | Вузы, студии и инвесторы: доступ к талантам раньше рынка. | О проекте'].join('\n')}]},
@@ -359,10 +377,12 @@ style:{skin:'aero',fh:'Exo 2',fb:'Nunito',fs:17,r:14,w:1040,bubbles:true,dark:'a
 function fix(d){if(d.desc==null)d.desc=DEFAULT.desc;d.colors=Object.assign({},DEFAULT.colors,d.colors||{});d.style=Object.assign({},DEFAULT.style,d.style||{});d.images=d.images||{};return d}
 function onC(h){var n=parseInt(String(h).slice(1),16);if(isNaN(n))return '#FFFFFF';return (0.299*(n>>16&255)+0.587*(n>>8&255)+0.114*(n&255))/255>0.6?'#1A2630':'#FFFFFF'}
 function siteJS(){
-var tabs=[].slice.call(document.querySelectorAll('.tab')),panes=[].slice.call(document.querySelectorAll('.pane')),lb=document.querySelector('.lb'),dm=document.querySelector('.dm');
+var tabs=[].slice.call(document.querySelectorAll('.tab')),panes=[].slice.call(document.querySelectorAll('.pane')),lb=document.querySelector('.lb'),dm=document.querySelector('.dm'),eg=document.querySelector('.egg'),ec=0,et=0;
 function show(n){if(!document.getElementById('p-'+n))return;panes.forEach(function(p){p.hidden=p.id!=='p-'+n});tabs.forEach(function(t){t.setAttribute('aria-selected',t.dataset.tab===n?'true':'false')});window.scrollTo(0,0)}
 function step(s){dm.querySelectorAll('.dstep').forEach(function(x){x.hidden=x.dataset.s!==s});var f=dm.querySelector('.dstep[data-s="'+s+'"] button');if(f)f.focus()}
 document.addEventListener('click',function(e){
+if(eg){if(!eg.hidden){if(e.target===eg||e.target.closest('.eggx'))eg.hidden=true;return}
+if(e.target.closest('.logo')){var n=Date.now();ec=n-et<1200?ec+1:1;et=n;if(ec>=5){ec=0;eg.hidden=false;var im=eg.querySelector('img');im.style.animation='none';im.offsetWidth;im.style.animation=''}return}}
 var b=e.target.closest('.wsup');if(b){var t=b.closest('.work').querySelector('h3').textContent;dm.querySelectorAll('.dwork').forEach(function(x){x.textContent=t});dm.querySelector('.dmail').href='mailto:'+dm.dataset.mail+'?subject='+encodeURIComponent('Донат автору: '+t);dm.hidden=false;step('choose');return}
 if(!dm.hidden){var to=e.target.closest('[data-to]');if(to){step(to.dataset.to);return}
 if(e.target===dm||e.target.closest('.dx')){dm.hidden=true;return}
@@ -371,7 +391,7 @@ var z=e.target.closest('.gal img');if(z){lb.firstChild.src=z.src;lb.hidden=false
 if(e.target.closest('.lb')){lb.hidden=true;return}
 var g=e.target.closest('[data-go]');if(g){show(g.dataset.go);return}
 var c=e.target.closest('.chip');if(c){var s=c.closest('section');s.querySelectorAll('.chip').forEach(function(x){x.setAttribute('aria-pressed',x===c?'true':'false')});s.querySelectorAll('.work').forEach(function(w){w.hidden=!!c.dataset.cat&&w.dataset.cat!==c.dataset.cat});return}});
-document.addEventListener('keydown',function(e){if(e.key==='Escape'){lb.hidden=true;dm.hidden=true}if(e.key==='Enter'){var g=e.target.closest&&e.target.closest('.lnk');if(g)show(g.dataset.go)}});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){lb.hidden=true;dm.hidden=true;if(eg)eg.hidden=true}if(e.key==='Enter'){var g=e.target.closest&&e.target.closest('.lnk');if(g)show(g.dataset.go)}});
 show(window.START);
 }
 function render(D,start,theme){
@@ -391,12 +411,13 @@ cards:function(b){return sec(head(b)+'<div class="grid"'+(+b.cols?' style="grid-
 steps:function(b){return sec(head(b)+'<ol class="steps">'+rows(b.items).map(function(r){return '<li><b>'+e(r[0])+'</b><span>'+e(r[1])+'</span></li>'}).join('')+'</ol>')},
 table:function(b){return sec(head(b)+'<div class="table"><table>'+rows(b.items).map(function(x,i){return '<tr>'+x.map(function(c){return i?'<td>'+e(c)+'</td>':'<th>'+e(c)+'</th>'}).join('')+'</tr>'}).join('')+'</table></div>')},
 works:function(b){var it=rows(b.items),cats=it.map(function(r){return r[0]}).filter(function(c,i,a){return a.indexOf(c)===i});
-return sec(head(b)+'<div class="chips"><button class="chip" data-cat="" aria-pressed="true" type="button">Все</button>'+cats.map(function(c){return '<button class="chip" data-cat="'+e(c)+'" aria-pressed="false" type="button">'+e(c)+'</button>'}).join('')+'</div><div class="works">'+it.map(function(r,i){var u=iu(D,r[3]),img=u?' style="background:url(&quot;'+e(u)+'&quot;) center/cover"':'';return '<article class="work" data-cat="'+e(r[0])+'"><div class="cover c'+(i%3+1)+'"'+img+'><span class="status">'+e(r[0])+'</span>'+(u?'':'<svg><use href="#i-'+ic(r[0])+'"/></svg>')+'</div><div class="wbody"><h3>'+e(r[1])+'</h3><small>'+e(r[2])+'</small><div class="row"><span><b>0</b> €</span><button class="wsup" type="button">Поддержать</button></div></div></article>'}).join('')+'</div>')},
+return sec(head(b)+'<div class="chips"><button class="chip" data-cat="" aria-pressed="true" type="button">Все</button>'+cats.map(function(c){return '<button class="chip" data-cat="'+e(c)+'" aria-pressed="false" type="button">'+e(c)+'</button>'}).join('')+'</div><div class="works">'+it.map(function(r,i){var u=iu(D,r[3]),img=u?' style="background:url(&quot;'+e(u)+'&quot;) center/cover"':'',site=/^https?:\/\//.test(r[4]||'')?r[4]:'';return '<article class="work" data-cat="'+e(r[0])+'" data-kind="'+ic(r[0])+'"><div class="cover c'+(i%3+1)+'"'+img+'><span class="status">'+e(r[0])+'</span>'+(u?'':'<svg><use href="#i-'+ic(r[0])+'"/></svg>')+'</div><div class="wbody"><h3>'+e(r[1])+'</h3><small>'+e(r[2])+'</small>'+(site?'<a class="asite" href="'+e(site)+'" target="_blank" rel="noopener">Сайт автора ↗</a>':'')+'<div class="row"><span><b>0</b> €</span><button class="wsup" type="button">Поддержать</button></div></div></article>'}).join('')+'</div>')},
 image:function(b){var u=iu(D,b.src),w=b.w==null||b.w===''?100:+b.w,rd=b.rd==null||b.rd===''?16:+b.rd,g=b.go&&pg.some(function(p){return p.id===b.go});
 return sec(head(b)+'<figure class="fig '+e(b.al||'c')+'"><span class="pw'+(b.gl?' gl':'')+(g?' lnk':'')+'" style="--iw:'+w+'%;--ir:'+rd+'px"'+(g?' data-go="'+e(b.go)+'" tabindex="0" role="link"':'')+'>'+(u?'<img src="'+e(u)+'" alt="'+e(b.cap||b.title)+'">':'<div class="ph"><svg><use href="#i-art"/></svg><span>Картинка не выбрана</span></div>')+'</span>'+(b.cap?'<figcaption class="note">'+e(b.cap)+'</figcaption>':'')+'</figure>')},
 gallery:function(b){return sec(head(b)+'<div class="gal" style="--cols:'+(+b.cols||3)+';--ratio:'+e(b.ratio||'4/3')+'">'+rows(b.items).map(function(r){var u=iu(D,r[1]);return '<figure>'+(u?'<img src="'+e(u)+'" alt="'+e(r[0])+'" loading="lazy">':ph)+(r[0]?'<figcaption>'+e(r[0])+'</figcaption>':'')+'</figure>'}).join('')+'</div>')},
 imgtext:function(b){var u=iu(D,b.src);return sec('<div class="it'+(b.side==='r'?' r':'')+'"><div class="itimg">'+(u?'<img src="'+e(u)+'" alt="">':ph)+'</div><div><h2>'+e(b.title)+'</h2>'+paras(b.text)+(b.b1?'<button class="btn" type="button" data-go="'+e(b.p1)+'">'+e(b.b1)+'</button>':'')+'</div></div>')},
 canvas:function(b){return sec(head(b)+'<div class="cv"><svg viewBox="0 0 1000 '+ch(b)+'">'+shapesSvg(b.shapes,'m'+(cn++)+'_',D.images)+'</svg></div>')},
+guest:function(b){var u=/^https:\/\//.test(b.url||'')?b.url:'';return sec(head(b)+(u&&b.embed?'<div class="gb"><iframe src="'+e(u)+'" title="'+e(b.title)+'" loading="lazy"></iframe></div>':'')+'<div class="gbox"><div class="gico" aria-hidden="true">✎</div><div><b>'+(u?'Записи гостей':'Гостевая книга скоро откроется')+'</b><p>'+(u?'Откройте книгу и оставьте запись: её увидят все посетители.':'А пока оставьте отзыв письмом, мы прочитаем каждое.')+'</p></div>'+(u?'<a class="btn" href="'+e(u)+'" target="_blank" rel="noopener">Открыть гостевую книгу</a>':'<a class="btn" href="mailto:'+e(D.mail)+'?subject='+encodeURIComponent('Отзыв о «Дебюте»')+'">Оставить отзыв</a>')+'</div>')},
 cta:function(b){return sec('<h2>'+e(b.title)+'</h2>'+(b.text?'<p class="lead">'+e(b.text)+'</p>':'')+'<a class="btn" href="'+e(b.link||'mailto:'+D.mail)+'">'+e(b.b1)+'</a>')}};
 function wrap(b,h){if(b._hide)return '';var s='',c='blk',u=iu(D,b._bgi);
 if(b._bg)s+='background-color:'+b._bg+';';if(u)s+='background-image:url("'+cssU(u)+'");background-size:cover;background-position:center;';if(b._bg||u)c+=' hasbg';
@@ -418,8 +439,9 @@ var donate='<div class="dm" hidden role="dialog" aria-modal="true" aria-label="�
 +'<div class="dbank"><b>Напишите лично и задонатьте напрямую на банк</b><p>Напишите нам на почту, и мы пришлём реквизиты для перевода автору.</p><a class="btn dmail" href="mailto:'+e(D.mail)+'">Написать на почту</a></div>'+back+'</div></div></div>';
 var ico=lg||'data:image/svg+xml,'+encodeURIComponent("<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><defs><radialGradient id='g' cx='.36' cy='.3' r='.8'><stop offset='0' stop-color='#fff'/><stop offset='.28' stop-color='"+c.blue+"' stop-opacity='.55'/><stop offset='1' stop-color='"+c.blue+"'/></radialGradient></defs><circle cx='32' cy='32' r='30' fill='url(#g)'/></svg>");
 var meta=(D.desc?'<meta name="description" content="'+e(D.desc)+'"><meta property="og:description" content="'+e(D.desc)+'">':'')+'<meta property="og:title" content="'+e(D.title)+'"><meta property="og:type" content="website"><meta property="og:locale" content="ru_RU"><meta name="theme-color" content="'+e(c.blue)+'"><link rel="icon" href="'+e(ico)+'">';
+var eu=iu(D,st.egg),egg=eu?'<div class="egg" hidden role="dialog" aria-label="Пасхалка"><div class="eggbox"><img src="'+e(eu)+'" alt="Секретная картинка"><p><b>Вы нашли секретный этаж «Дебюта»!</b><br>Тут кто-то держит весь сайт на распорках.</p><button class="btn eggx" type="button">Спуститься обратно</button></div></div>':'';
 var logo=(lg?'<img class="logoimg" src="'+e(lg)+'" alt="">':'<span class="mark"></span>')+e(D.logo);
-return '<!DOCTYPE html>\n<html lang="ru"'+(theme?' data-theme="'+theme+'"':'')+'><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>'+e(D.title)+'</title>'+meta+fontLinks(st)+'<style>'+css+'</style></head><body>'+syms+(aero&&st.bubbles?'<div class="bubbles" aria-hidden="true">'+bubbles()+'</div>':'')+'<div class="page"><nav class="top"><div class="pad"><span class="logo">'+logo+'</span><div class="tabs" role="tablist">'+tabs+'</div></div></nav>'+panes+'<footer><div class="row"><b>'+e(D.ft)+'</b><a class="btn" href="mailto:'+e(D.mail)+'">Написать</a></div>'+e(D.footer)+'</footer></div><div class="lb" hidden><img alt=""></div>'+donate+'<script>window.START='+JSON.stringify(start)+';('+siteJS.toString()+')()<'+'/script></body></html>'}
+return '<!DOCTYPE html>\n<html lang="ru"'+(theme?' data-theme="'+theme+'"':'')+'><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>'+e(D.title)+'</title>'+meta+fontLinks(st)+'<style>'+css+'</style></head><body>'+syms+(aero&&st.bubbles?'<div class="bubbles" aria-hidden="true">'+bubbles()+'</div>':'')+'<div class="page"><nav class="top"><div class="pad"><span class="logo">'+logo+'</span><div class="tabs" role="tablist">'+tabs+'</div></div></nav>'+panes+'<footer><div class="row"><b>'+e(D.ft)+'</b><a class="btn" href="mailto:'+e(D.mail)+'">Написать</a></div>'+e(D.footer)+'</footer></div><div class="lb" hidden><img alt=""></div>'+donate+egg+'<script>window.START='+JSON.stringify(start)+';('+siteJS.toString()+')()<'+'/script></body></html>'}
 </script>
 <script>
 (function(){
@@ -470,7 +492,7 @@ function askUrl(old){var u=prompt('Вставьте ссылку на карти
 function fopt(v){return Object.keys(FONTS).map(function(f){return '<option value="'+f+'"'+(f===v?' selected':'')+'>'+(f==='system'?'Системный (как в Windows)':f)+'</option>'}).join('')}
 function fields(){var s=D.style;
 document.querySelectorAll('[data-g]').forEach(function(i){i.value=D[i.dataset.g]||''});
-$('logoF').innerHTML=imgF('s','logo','Логотип (картинка вместо кружка)',s.logo);
+$('logoF').innerHTML=imgF('s','logo','Логотип (картинка вместо кружка)',s.logo)+imgF('s','egg','Пасхалка: картинка после 5 быстрых кликов по логотипу',s.egg);
 $('pres').innerHTML=Object.keys(PRE).map(function(k){var p=PRE[k];return '<button data-a="pre" data-v="'+k+'"><i style="background:linear-gradient(135deg,'+p.c.blue+' 0 50%,'+p.c.sun+' 50%)"></i>'+p.n+'</button>'}).join('');
 $('cols').innerHTML=[['bg','Фон сайта'],['surface','Фон страницы и карточек'],['blue','Основной акцент'],['sun','Второй акцент'],['ink','Текст']].map(function(x){return '<label class="lc">'+x[1]+cf('data-c="'+x[0]+'"',D.colors[x[0]],x[1])+'</label>'}).join('');
 $('sty').innerHTML='<label>Стиль сайта<select data-s="skin">'+opt([['aero','Frutiger Aero: стекло, глянец, небо'],['flat','Плоский: строгий и простой']],s.skin)+'</select></label>'
